@@ -37,6 +37,10 @@ public class Employee {
         this.salario += salario * porcentagem / 100;
     }
 
+    @Override
+    public String toString(){
+        return id + ", " + name + ", " + String.format("%.2f", salario);
+    }
 
     
 

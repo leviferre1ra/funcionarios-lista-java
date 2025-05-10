@@ -19,6 +19,12 @@ public class App {
             System.out.println("Funcionário #" + (i+1) + ":");
             System.out.print("Id: ");
             Integer id = sc.nextInt();
+
+            while(hasId(list, id)){
+                System.out.println("Este Id já existe! Tente novamente: ");
+                id = sc.nextInt();
+            }
+
             System.out.print("Nome: ");
             sc.nextLine();
             String nome = sc.nextLine();
@@ -29,6 +35,7 @@ public class App {
             list.add(emp);
         }
 
+        System.out.println();
         System.out.println("Qual o Id do funcionário que receberá o aumento? ");
         int idAumento = sc.nextInt();
 
@@ -39,11 +46,21 @@ public class App {
         } else {
             System.out.println("Entre com a porcentagem: ");
             double porcentagem = sc.nextDouble();
+            emp.aumentoSalario(porcentagem);
+        }
+
+        System.out.println();
+        System.out.println("Lista de funcionários");
+        for(Employee e : list){
+            System.out.println(e);
         }
 
         sc.close();
     }
 
-
+    public static boolean hasId(List<Employee> list, int id ){
+        Employee emp = list.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+        return emp != null;
+    }
 
 }
